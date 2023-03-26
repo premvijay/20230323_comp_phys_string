@@ -6,7 +6,7 @@ from matplotlib.animation import FuncAnimation   # Importing Animation libraries
 #%%
 M = 300
 N=1001
-x_i=np.linspace(0,1,M) #Defining an array of x steps from 0 to 99. i.e., 0,1,2,3,4,...
+x_i=np.linspace(0,1,M) #Defining an array of x steps from 0 to M. i.e., 0,1,2,3,4,...
 y=np.zeros(shape=(M,N)) #Defining an array of size MxN, used below
 
 y[0,0]=y[-1,0]=0 #Boundary condition, walls are fixed
@@ -62,7 +62,7 @@ Delx = 1/M
 Delt = 0.02
 
 r=c*Delt/Delx
-x_i=np.linspace(0,1,M) #Defining an array of x steps from 0 to 99. i.e., 0,1,2,3,4,...
+x_i=np.linspace(0,1,M) #Defining an array of x steps from 0 to M. i.e., 0,1,2,3,4,...
 y=np.zeros(shape=(M,N)) #Defining an array of size MxN, used below
 
 y[0,0]=y[-1,0]=0 #Boundary condition, walls are fixed
