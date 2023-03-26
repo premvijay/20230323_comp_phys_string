@@ -15,7 +15,7 @@ Delx = 1/M
 # Delt = Delx/c
 Delt = 0.02
 
-eps = 1e-5
+eps = 3e-5 # stiffness
 L=1
 Ml = L/Delx
 
@@ -52,12 +52,13 @@ for n in range(1,N-1):
 
 #%%
 def animate(n): #Defining a function which will animate the waves amplitude (y) as function of t.
-	ax.clear() # Clear the previous plot for animation from screen.
-	ax.plot(x_i,y[:,n]) #Plotting y3 as a function of x_i. It will show displacement (y) for the string ax a function of x for an instant of time.
-	ax.set_ylim(-1.1,1.1) # Set y limits between -1.1 to 1.1
-	ax.set_xlabel('m')
-	ax.text(0.7,1,f't={n*Delt:.2f} s', fontsize=20)
-	ax.set_title(f"Waves on a 'stiff' string (fixed ends) with c={c} m/s. Hence r={r}", fontsize=22) # Writing some relevant text on the plot.
+    ax.clear() # Clear the previous plot for animation from screen.
+    ax.plot(x_i,y[:,n]) #Plotting y3 as a function of x_i. It will show displacement (y) for the string ax a function of x for an instant of time.
+    ax.set_ylim(-1.1,1.1) # Set y limits between -1.1 to 1.1
+    ax.set_xlabel('m')
+    ax.text(0.7,1,f't={n*Delt:.2f} s', fontsize=20)
+    ax.text(0.7,-1,f'Here r={r:.2f}', fontsize=20)
+    ax.set_title(f"Waves on a 'stiff' string (fixed ends) with c={c} m/s and $\\epsilon$={eps}", fontsize=22) # Writing some relevant text on the plot.
 
 fig, ax = plt.subplots(nrows=1, ncols=1, sharex=True, sharey=True, figsize=(20, 16))
 plt.subplots_adjust(left=0.1, bottom =0.124, right=0.963, top=0.97, wspace=0, hspace=0)
@@ -65,5 +66,28 @@ plt.subplots_adjust(left=0.1, bottom =0.124, right=0.963, top=0.97, wspace=0, hs
 
 ani=FuncAnimation(fig, animate, frames=range(0,N,5),interval=100) # Animating the plot 
 fig.show() #Showing the plot
+
+# %%
+
+
+#%%
+
+
+
+
+
+
+
+#%%
+data = y[int(M*0.05),:]
+
+ps = np.abs(np.fft.fft(data))**2
+
+time_step = 1 / 30
+freqs = np.fft.fftfreq(data.size, time_step)
+idx = np.argsort(freqs)
+
+plt.plot(freqs[idx], ps[idx])
+
 
 # %%
