@@ -8,14 +8,14 @@ from matplotlib.animation import FuncAnimation   # Importing Animation libraries
 
 #%%
 M = 300
-N=1001
+N=10001
 
 c=0.03
 Delx = 1/M
 # Delt = Delx/c
 Delt = 0.02
 
-eps = 3e-5 # stiffness
+eps = 2e-5 # stiffness
 L=1
 Ml = L/Delx
 
@@ -24,7 +24,7 @@ x_i=np.linspace(0,1,M) #Defining an array of x steps from 0 to M. i.e., 0,1,2,3,
 y=np.zeros(shape=(M,N)) #Defining an array of size MxN, used below
 
 y[0,0]=y[-1,0]=0 #Boundary condition, walls are fixed
-y[:,0]=np.exp(-1000*(x_i-0.3)**2) # Given in equation 6.8
+y[:,0]=np.exp(-1000*(x_i-0.45)**2) # Given in equation 6.8
 
 y[0,1]=y[-1,1]=0 #Boundary condition, walls are fixed
 for i in range(1,M-1): #loop for calucating y values as function of x at time t=1*del_t
@@ -79,7 +79,7 @@ fig.show() #Showing the plot
 
 
 #%%
-data = y[int(M*0.05),:]
+data = y[int(M*0.5),:]
 
 ps = np.abs(np.fft.fft(data))**2
 
@@ -90,4 +90,13 @@ idx = np.argsort(freqs)
 plt.plot(freqs[idx], ps[idx])
 
 
+# %%
+from scipy import signal
+f, Pxx_spec = signal.welch(data, 1e3, 'flattop', 1024, scaling='spectrum')
+plt.figure()
+plt.semilogy(f, np.sqrt(Pxx_spec))
+plt.xlabel('frequency [Hz]')
+plt.ylabel('Linear spectrum [V RMS]')
+plt.title('Power spectrum')
+plt.show()
 # %%
