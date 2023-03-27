@@ -39,9 +39,16 @@ fig.show() #Showing the plot
 # %%
 
 
+fig, axes = plt.subplots(5,1, sharex=True, sharey=True)
+
+axes[0].plot(x_i, y[:,0])
+
+axes[1].plot(x_i, y[:,10])
+
+axes[2].plot(x_i, y[:,30])
 
 
-
+axes[0].set_ylim(-1.2,1.2)
 
 
 
@@ -93,4 +100,21 @@ plt.subplots_adjust(left=0.1, bottom =0.124, right=0.963, top=0.97, wspace=0, hs
 ani=FuncAnimation(fig, animate, frames=range(0,N,5),interval=100) # Animating the plot 
 fig.show() #Showing the plot
 
+
+
+fig, axes = plt.subplots(5,1, sharex=True, sharey=True)
+
+axes[0].plot(x_i, y[:,0])
+
+axes[1].plot(x_i, y[:,10])
+
+axes[2].plot(x_i, y[:,30])
+axes[3].plot(x_i, y[:,50])
+axes[4].plot(x_i, y[:,70])
+
+
+axes[0].set_ylim(-1.2,1.2)
 # %%
+
+
+
